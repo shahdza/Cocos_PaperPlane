@@ -28,7 +28,7 @@ bool GameOverLayer::init()
 }
 
 
-// »ñÈ¡·ÖÊıÊı¾İ
+// è·å–åˆ†æ•°æ•°æ®
 void GameOverLayer::getData()
 {
 	this->record = UserDefault::getInstance()->getIntegerForKey("Record", 0);
@@ -37,13 +37,13 @@ void GameOverLayer::getData()
 
 	if (this->score > this->record)
 	{
-		UserDefault::getInstance()->setDoubleForKey("Record", this->score);
+		UserDefault::getInstance()->setIntegerForKey("Record", this->score);
 		UserDefault::getInstance()->flush();
 	}
 }
 
 
-// ¼ÓÔØUI
+// åŠ è½½UI
 void GameOverLayer::addUI()
 {
 	this->bg = (Layout*)cocostudio::GUIReader::getInstance()->widgetFromJsonFile("GameOverUI/GameOverUI.json");
@@ -57,13 +57,13 @@ void GameOverLayer::addUI()
 	auto btnBack = (Button*)Helper::seekWidgetByName(bg, "BtnBack");
 	btnBack->addTouchEventListener(CC_CALLBACK_2(GameOverLayer::turnToMenuScene, this));
 
-	// ĞÂ·ÖÊı
+	// æ–°åˆ†æ•°
 	this->text =(TextBMFont*) ui::Helper::seekWidgetByName(this->bg, "Score");
 	char str[50];
 	sprintf(str, "%d", this->score);
 	this->text->setString(str);
 
-	// ÀúÊ·¼ÇÂ¼
+	// å†å²è®°å½•
 	auto rd = (TextBMFont*)ui::Helper::seekWidgetByName(this->bg, "Record");
 	char s[50];
 	sprintf(s, "%d", this->record);
@@ -85,7 +85,7 @@ void GameOverLayer::showAction()
 }
 
 
-// ·ÖÊı¶¯Ì¬Ğ§¹û
+// åˆ†æ•°åŠ¨æ€æ•ˆæœ
 void GameOverLayer::update(float dt)
 {
 	char s[50];
@@ -107,7 +107,7 @@ void GameOverLayer::update(float dt)
 }
 
 
-// ÏÔÊ¾ÊÇ·ñÎªĞÂ¼ÇÂ¼
+// æ˜¾ç¤ºæ˜¯å¦ä¸ºæ–°è®°å½•
 void GameOverLayer::showNewLogo()
 {
 	if (this->score > this->record)
@@ -122,7 +122,7 @@ void GameOverLayer::showNewLogo()
 }
 
 
-// ÔÙÍæÒ»´Î
+// å†ç©ä¸€æ¬¡
 void GameOverLayer::turnToGameScene(Ref* sender, Widget::TouchEventType type)
 {
 	if (type == Widget::TouchEventType::ENDED)
@@ -133,7 +133,7 @@ void GameOverLayer::turnToGameScene(Ref* sender, Widget::TouchEventType type)
 }
 
 
-// ·µ»Ø²Ëµ¥½çÃæ
+// è¿”å›èœå•ç•Œé¢
 void GameOverLayer::turnToMenuScene(Ref* sender, Widget::TouchEventType type)
 {
 	if (type == Widget::TouchEventType::ENDED)
